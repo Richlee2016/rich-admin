@@ -4,7 +4,7 @@ import profil from "@/assets/images/logo.png";
 import { Link } from "react-router-dom";
 const SubMenu = Menu.SubMenu;
 
-const Menus = ({ collapsed, menus,user }) => {
+const Menus = ({ collapsed, menus }) => {
 
   const handleSelect = e => {
     console.log(0);
@@ -44,12 +44,6 @@ const Menus = ({ collapsed, menus,user }) => {
       }
     });
   return <div className="menu">
-      {/*<div className="profil">
-        <div>
-          <img src={user?user.qqInfo.figureurl:profil} />
-        </div>
-        {user.qqInfo.nickname}
-      </div>*/}
       <Menu style={{ border: "none" }} mode="inline" inlineCollapsed={collapsed} onSelect={handleSelect}>
         {MenuJsx(menus)}
       </Menu>

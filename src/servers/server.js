@@ -12,8 +12,8 @@ export const get_crawler_page = () => rxios("GET", "/crawler/movie_page");
 // export const log_out = () => rxios("DEL", "/oauth/users");
 export const get_users = () => rxios("GET", "/oauth/users");
 // 会话
-export const Session_Login = qs => rxios("GET", "/api/session/Session", qs);
-export const Session_Logout = () => rxios("POST", "/api/session/DeleteSession");
+export const Session_Login = qs => rxios("GET","/api/session",qs);
+export const Session_Logout = () => rxios("DEL","/api/session");
 // 用户
 export const Get_Users = () => rxios("GET","/api/users");
 // 电影

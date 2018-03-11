@@ -24,7 +24,7 @@ export default class Routers extends React.Component {
           )}
         />
         <Route
-          path="/movie/hot/add"
+          path="/movie/hot_add"
           render={props => (
             <LazyRoute {...props} component={import("@/views/Movie/hot/add")} />
           )}

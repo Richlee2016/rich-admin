@@ -1,75 +1,69 @@
-import { observable, action, computed, runInAction } from "mobx";
-import {
-  Get_Moives,
-  get_crawler_page,
-  get_crawler_home,
-  get_online_list,
-  Get_Users
-} from "@/servers/server";
-import { detection } from "@/utils";
+import { observable, action, computed, runInAction,useStrict} from "mobx";
+import {message} from "antd"
+import { Get_Home_Movie,Get_Hot_Movie,Add_Hot_Movie} from "@/servers/movie";
+import { Promise } from "core-js";
+useStrict(true);
 class Movie {
-  // menu
-  @observable list; //电影列表
-  @observable onlineList; //电影列表
-  @observable loading; //loading缓冲
-  @observable crawlerRes;
-  @observable users
-  constructor() {
-    this.list = {};
-    this.onlineList = {}
-    this.loading = false;
-    this.crawlerRes = null;
-    this.users = []
+  constructor() {}
+
+  @observable list = {}; //电影列表
+  @observable hot ={}; //推荐电影
+  @observable onlineList = {}; //电影列表
+  @observable loading = false; //loading缓冲
+  
+  sleep(time){
+    return new Promise((resolve,reject) => {
+      setTimeout(()=> {
+        resolve();
+      },time)
+    })
+  }
+  // 获取 电影列表
+  @action
+  async getHomeMovie(qs){
+    this.loading = true;
+    try {
+      const {data:{movies}} = await Get_Home_Movie(qs);
+      runInAction(() => {
+        this.list = movies;
+        message.info("获取成功")
+        this.loading = false;
+      });
+    } catch (error) {
+      runInAction(() => {
+        message.error("获取错误")
+      });
+    }
   }
 
-  // 获取电影列表
-  getList = async qs => {
+  // 获取 推荐电影
+  @action
+  async getHotMovie(qs){
     this.loading = true;
-    const {data} = await Get_Moives(qs);
-    runInAction(() => {
-        this.list = data.movies;
+    try {
+      const {data:{movies}} = await Get_Hot_Movie(qs);
+      runInAction(() => {
+        this.hot = movies;
         this.loading = false;
-    });
-  };
+      });
+    } catch (error) {
+      message.error("获取错误")
+    }
+  }
 
-  // 获取电影列表
-  fetchOnlineList = async qs => {
+  // 添加 推荐电影
+  @action.bound
+  async addHotMovie(qs,fn){
     this.loading = true;
-    const res = await get_online_list(qs);
-    const {data:{code,data}} = res;
-    runInAction(() => {
-      if(code === 1){
-         this.onlineList = data;   
-         this.loading = false; 
-      };
-    });
-  };
-
-  // 爬虫
-  crawlerGet = async (type) => {
-    this.loading = true;
-    let res= {};
-    if(type === 'page'){
-      res = await get_crawler_page();
-    }else if(type === 'home'){
-      res = await get_crawler_home();
-    };
-    runInAction(() => {
-        this.crawlerRes = res;
-        this.loading = false;
-    });
-  };
-
-  // 获取用户信息
-  fetchUsers = async () => {
-    this.loading = true;
-    const res = await Get_Users();
-    console.log(res);
-    runInAction(() => {
-         this.users = data;   
-         this.loading = false; 
-    });
-  };
+    try {
+      const res = await Add_Hot_Movie(qs);
+      this.loading = false;
+      message.info("添加成功")
+      fn&&fn();
+    } catch (error) {
+      message.error("获取错误")
+    }
+  }
 }
 
 const movie = new Movie();

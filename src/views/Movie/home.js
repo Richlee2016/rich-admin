@@ -54,11 +54,11 @@ export default class MovieHome extends React.Component {
   }
   // 初始化
   componentDidMount() {
-    this.store.getList({ page: 1, size: 10 });
+    this.store.getHomeMovie({ page: 1, size: 10 });
   }
   // 翻页请求
   querySet(page, size) {
-    this.store.getList({ page, size });
+    this.store.getHomeMovie({ page, size });
   }
   // 删除弹窗
   removeMovie(id) {
