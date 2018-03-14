@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Header, Menus } from "@/components/Layout";
+import { Header, Menus,Card } from "@/components/Layout";
 import { inject, observer } from "mobx-react";
 import config from "@/config";
 // import RouterCom from "@/router"

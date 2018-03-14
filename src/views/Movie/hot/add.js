@@ -1,6 +1,6 @@
 import React from "react";
 import { inject, observer } from "mobx-react";
-import { Form, Input, Button,Radio} from 'antd';
+import { Form, Input, Button,Radio,Card} from 'antd';
 
 const RadioGroup = Radio.Group;
 const FormItem = Form.Item;
@@ -50,6 +50,9 @@ class MovieHotAdd extends React.Component {
     const {loading} = this.store;
     return (
       <div>
+        <Card title="添加推荐电影">
+          <p>添加推荐电影</p>
+        </Card>
         <FormItem {...formItemLayout} label="名字">
           {getFieldDecorator('name', {
             rules: [{
@@ -81,7 +84,7 @@ class MovieHotAdd extends React.Component {
           )}
         </FormItem>
         <FormItem {...formItemLayout} label="图片">
-          {getFieldDecorator('video', {
+          {getFieldDecorator('cover', {
             rules: [{
               required: true,
               message: '请输入图片地址',
@@ -91,7 +94,7 @@ class MovieHotAdd extends React.Component {
           )}
         </FormItem>
         <FormItem {...formItemLayout} label="视频">
-          {getFieldDecorator('cover', {
+          {getFieldDecorator('video', {
             rules: [{
               required: true,
               message: '请输入视频地址',

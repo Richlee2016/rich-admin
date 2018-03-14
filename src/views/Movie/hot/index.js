@@ -1,5 +1,5 @@
 import React from "react";
-import { Table, Button, Modal, Popconfirm } from "antd";
+import { Table, Button, Modal, Popconfirm,Card } from "antd";
 import { Link } from "react-router-dom";
 import { inject, observer } from "mobx-react";
 import { toJS } from "mobx";
@@ -76,9 +76,11 @@ export default class MovieHot extends React.Component {
     const that = this;
     return (
       <div className="movie-home">
-      <Link to={'/movie/hot_add'}>
-        <Button type="primary">添加</Button>
-      </Link>
+        <Card title="推荐电影">
+          <Link to={'/movie/hot_add'}>
+            <Button type="primary">添加</Button>
+          </Link>
+        </Card>
         <Table
           rowKey={record => record._id}
           dataSource={toJS(list)}

@@ -43,8 +43,16 @@ const Menus = ({ collapsed, menus }) => {
         )
       }
     });
-  return <div className="menu">
-      <Menu style={{ border: "none" }} mode="inline" inlineCollapsed={collapsed} onSelect={handleSelect}>
+  return <div className="la-menu">
+      <div className="la-icon">
+
+      </div>
+      <Menu 
+      style={{ border: "none" }} 
+      mode="inline" 
+      inlineCollapsed={collapsed} 
+      onSelect={handleSelect}
+      theme={"dark"}>
         {MenuJsx(menus)}
       </Menu>
     </div>;

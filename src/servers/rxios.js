@@ -1,6 +1,5 @@
 var qs = require("querystring");
 import axios from "axios";
-
 //  get、post
 export default (type, url, data, mixin) => {
   const qsData = qs.stringify(data);
