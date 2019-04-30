@@ -2,15 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { toJS } from '@/store/utils'
 import { Actions as AC, Thunks as TH } from './model'
+import { Button } from 'antd'
 class Index extends Component {
   render () {
-    const { add, num, Go, AsyncAdd } = this.props
+    const { login, logout } = this.props
     return (
       <div>
-        <span>{num}</span>
-        <button onClick={add}>+++</button>
-        <button onClick={Go}>到首页</button>
-        <button onClick={AsyncAdd}>来啊</button>
+        <Button type='primary' onClick={login}>登录</Button><br />
+        <Button type='primary' onClick={logout}>退出</Button>
       </div>
     )
   }
@@ -21,8 +20,7 @@ export default connect(
     num: state.getIn(['login', 'num'])
   }),
   {
-    add: AC.add,
-    Go: TH.GoIndex,
-    AsyncAdd: TH.AsyncAdd
+    login: TH.FetchToken,
+    logout: AC.logout
   }
 )(toJS(Index))
