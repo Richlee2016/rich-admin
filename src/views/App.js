@@ -1,11 +1,11 @@
-import React from 'react'
-import RouterCom from '@/router'
-import './App.less'
+import React from 'react';
+import RouterCom from '@/router';
+import './App.less';
 
-export default function () {
+export default function() {
   return (
-    <div className='container'>
+    <div className="container">
       <RouterCom />
     </div>
-  )
+  );
 }
