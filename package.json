@@ -80,8 +80,13 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
+    "fix:prettier": "prettier --write \"**/*.{js,json,css,less,md}\"",
+    "lint:prettier": "prettier --check \"**/*.{js,json,css,less,md}\"",
     "fix:js": "eslint --ext .js ./ --cache --quiet --fix",
-    "lint:js": "eslint --ext .js ./ --cache --quiet"
+    "lint:js": "eslint --ext .js ./ --cache --quiet",
+    "fix:style": "stylelint \"src/**/*.less\" --syntax less --fix",
+    "lint:style": "stylelint \"src/**/*.less\" --syntax less",
+    "lint": "npm run lint:prettier && npm run lint:js && npm run lint:style"
   },
   "eslintConfig": {
     "extends": "react-app"
