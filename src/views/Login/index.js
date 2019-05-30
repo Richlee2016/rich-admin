@@ -1,8 +1,9 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { toJS } from "@/store/utils";
-import { Actions as AC, Thunks as TH } from "./model";
-import { Button } from "antd";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { toJS } from '@/store/utils';
+import { Actions as AC, Thunks as TH } from './model';
+import { Button } from 'antd';
+
 class Index extends Component {
   render() {
     const { login, logout } = this.props;
@@ -22,10 +23,10 @@ class Index extends Component {
 
 export default connect(
   state => ({
-    num: state.getIn(["login", "num"])
+    num: state.getIn(['login', 'num']),
   }),
   {
     login: TH.FetchToken,
-    logout: AC.logout
+    logout: AC.logout,
   }
 )(toJS(Index));

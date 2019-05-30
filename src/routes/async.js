@@ -1,23 +1,23 @@
-import React from 'react'
+import React from 'react';
 /** 按需加载 */
-export default function asyncComponent (importComponent) {
+export default function asyncComponent(importComponent) {
   class AsyncComponent extends React.Component {
-    constructor (props) {
-      super(props)
+    constructor(props) {
+      super(props);
       this.state = {
-        component: null
-      }
+        component: null,
+      };
     }
-    async componentDidMount () {
-      const { default: component } = await importComponent()
+    async componentDidMount() {
+      const { default: component } = await importComponent();
       this.setState({
-        component: component
-      })
+        component: component,
+      });
     }
-    render () {
-      const C = this.state.component
-      return C ? <C {...this.props} /> : null
+    render() {
+      const C = this.state.component;
+      return C ? <C {...this.props} /> : null;
     }
   }
-  return AsyncComponent
+  return AsyncComponent;
 }
