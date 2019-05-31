@@ -21,6 +21,8 @@ export const Thunks = {
     const token = '123456';
     await _timer(300);
     const user = { name: 'rich', role: ['admin'] };
+    localStorage.setItem('user', JSON.stringify(user));
+    localStorage.setItem('token', token);
     dispatch(Actions.login({ Token: token, User: user }));
   },
   AsyncAdd: () => async (dispatch, getStore) => {
@@ -34,12 +36,18 @@ export const Thunks = {
   GoIndex: () => async dispatch => {
     dispatch(push('/'));
   },
+  LogOut: () => async dispatch => {
+    localStorage.setItem('user', null);
+    localStorage.setItem('token', null);
+    dispatch(Actions.logout());
+    dispatch(push('/login'));
+  },
 };
 
 const INITIAL_STATE = {
   num: 0,
-  Token: null,
-  User: null,
+  Token: JSON.parse(localStorage.getItem('token')),
+  User: localStorage.getItem('user'),
   Routes: [],
 };
 
@@ -48,7 +56,7 @@ export default (state = fromJS(INITIAL_STATE), action) => {
     case Types.LOG_IN:
       return state.merge({ ...action.payload });
     case Types.LOG_OUT:
-      return state.merge({ token: null, user: null });
+      return state.merge({ Token: null, User: null });
     case Types.ADD_ROUTES:
       return state.update('Routes', () => action.payload);
     default:
