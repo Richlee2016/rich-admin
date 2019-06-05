@@ -7,12 +7,14 @@ const Types = {
   LOG_IN: 'Log/IN',
   LOG_OUT: 'Log/OUT',
   ADD_ROUTES: 'Log/ADD_ROUTES',
+  ADD_NUM: 'ADD_NUM',
 };
 
 export const Actions = {
   login: payload => ({ type: Types.LOG_IN, payload }),
   logout: () => ({ type: Types.LOG_OUT }),
   addRoutes: payload => ({ type: Types.ADD_ROUTES, payload }),
+  add: payload => ({ type: Types.ADD_NUM, payload }),
 };
 
 export const Thunks = {
@@ -59,6 +61,8 @@ export default (state = fromJS(INITIAL_STATE), action) => {
       return state.merge({ Token: null, User: null });
     case Types.ADD_ROUTES:
       return state.update('Routes', () => action.payload);
+    case Types.ADD_NUM:
+      return state.update('num', val => val + 1);
     default:
       return state;
   }

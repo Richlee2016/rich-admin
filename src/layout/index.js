@@ -1,18 +1,28 @@
 import React from 'react';
-import { Button } from 'antd';
+import { Button, Layout } from 'antd';
 import { connect } from 'react-redux';
 import { toJS } from '@/store/utils';
 import { Thunks as TH } from '@/views/Login/model';
-class Layout extends React.Component {
+import './index.less';
+const { Sider, Header, Content, Footer } = Layout;
+class LayoutIndex extends React.Component {
   render() {
     const { children, Token, logout } = this.props;
     return (
-      <div>
+      <div className="container">
         {Token ? (
-          <>
-            <Button onClick={logout}>quit</Button>
-            <div>{children}</div>
-          </>
+          <Layout className="layout-box">
+            <Sider>Sider</Sider>
+            <Layout>
+              <Header>
+                <Button onClick={logout} />
+              </Header>
+              <Content>
+                <div>{children}</div>
+              </Content>
+              <Footer>Footer</Footer>
+            </Layout>
+          </Layout>
         ) : (
           <div>{children}</div>
         )}
@@ -28,4 +38,4 @@ export default connect(
   {
     logout: TH.LogOut,
   }
-)(toJS(Layout));
+)(toJS(LayoutIndex));

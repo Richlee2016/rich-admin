@@ -10,6 +10,21 @@ export const LoginRoute = {
   component: ayc(() => import('../views/Login/index')),
 };
 
+// 电影路由
+const MovieRoute = [
+  {
+    path: '/movie',
+    name: 'movie',
+    exact: true,
+    component: ayc(() => import('../views/Home/index')),
+  },
+  {
+    path: '/movie/box',
+    name: 'moviebox',
+    component: ayc(() => import('../views/Home/index')),
+  },
+];
+
 // 主路由
 export const MainRoutes = [
   {
@@ -28,17 +43,7 @@ export const MainRoutes = [
     name: '403',
     component: ayc(() => import('../views/Error/403')),
   },
-  {
-    path: '/movie',
-    name: 'movie',
-    exact: true,
-    component: ayc(() => import('../views/Home/index')),
-  },
-  {
-    path: '/movie/box',
-    name: 'moviebox',
-    component: ayc(() => import('../views/Home/index')),
-  },
+  ...MovieRoute,
 ];
 
 // 权限过滤

@@ -6,8 +6,6 @@ import { toJS } from '@/store/utils';
 import { Actions as AC } from '@/views/Login/model';
 import Layout from '../layout';
 
-// {MainRoutes.map(r => RouterRender(r, this.props, '/login'))}
-
 class RouteConfig extends React.Component {
   render() {
     const { Token } = this.props;
